@@ -2,6 +2,7 @@ import unittest
 import pystache
 
 from examples.simple import Simple
+from examples.string_context import StringContext
 from examples.complex_view import ComplexView
 from examples.lambdas import Lambdas
 from examples.inverted import Inverted, InvertedLists
@@ -55,6 +56,11 @@ class TestView(unittest.TestCase):
         view = Simple()
         view.thing = other
         self.assertEquals(view.render(), "Hi chris!")
+
+    def test_get_or_attr_ignore_strings(self):
+        view = StringContext('{{count}}')
+        view.context_list = ['The cat sat on the mat', {'count': 5, 'color': "blue"}]
+        self.assertEquals(view.render(), "5")
 
     def test_complex(self):
         self.assertEquals(ComplexView().render(), 

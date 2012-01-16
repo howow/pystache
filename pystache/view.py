@@ -13,10 +13,8 @@ def get_or_attr(context_list, name, default=None):
         except KeyError:
             pass
         except:
-            try:
+            if hasattr(obj, name) and not isinstance(obj, basestring):
                 return getattr(obj, name)
-            except AttributeError:
-                pass
     return default
 
 class View(object):

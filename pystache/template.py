@@ -4,14 +4,15 @@ import collections
 import os
 import copy
 
-try:
-    import markupsafe
-    escape = markupsafe.escape
-    literal = markupsafe.Markup
-
-except ImportError:
-    escape = lambda x: cgi.escape(unicode(x))
-    literal = unicode
+# markupsafe screws with angle bracket modifiers
+#try:
+#    import markupsafe
+#    escape = markupsafe.escape
+#    literal = markupsafe.Markup
+#
+#except ImportError:
+escape = lambda x: cgi.escape(unicode(x))
+literal = unicode
 
 
 class Modifiers(dict):
